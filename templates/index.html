@@ -4,26 +4,14 @@
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Biblioteca</title>
+		<title>Better Bluetooth</title>
 
 	</head>
 
     <body>
-        <h1>Upload new book</h1>
-        
-        <form action="/" method=post enctype=multipart/form-data>
-            <input type=text name="book_title" placeholder="Book title">
-            <input type=file name=book>
-            <br>
-            <br>
-            <input type=submit value="Upload Book">
-
-            {% if error %}
-            <p class="error"><strong>Error:</strong> {{ error }}</p>
-            
-            {% endif %}
-        </form>
-          
+        <button onclick="location.href = '/send'">Send</button>
+        <button onclick="location.href = '/receive'" style="display:inline">Receive</button> 
     </body>
+ 
 </html>
 
