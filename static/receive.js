@@ -1,7 +1,7 @@
 import { download } from './helpers.js'
 
 document.addEventListener('DOMContentLoaded', event => {
-	const peer = new Peer('receiver', {host: 'localhost', port: 9000, key: 'peerjs', path: '/peerjs'})
+	const peer = new Peer('receiver', {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
 
 	peer.on('connection', conn => {
 		console.log('connected')
