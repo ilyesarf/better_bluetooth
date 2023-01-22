@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', event => {
-	const peer = new Peer('sender', {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
+	let name = document.cookie.split('name=')[1]
+
+	const peer = new Peer(name, {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
 
 	const conn = peer.connect('receiver')
 	

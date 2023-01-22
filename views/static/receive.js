@@ -8,7 +8,9 @@ function download(file){
 }
 
 document.addEventListener('DOMContentLoaded', event => {
-	const peer = new Peer('receiver', {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
+	let name = document.cookie.split('name=')[1]
+
+	const peer = new Peer(name+'-recv', {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
 
 	peer.on('connection', conn => {
 		console.log(`${conn.peer} connected`)

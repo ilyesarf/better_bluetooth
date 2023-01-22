@@ -5,8 +5,23 @@ html(lang="en")
 		meta(name='viewport' content='width=device-width, initial-scale=1')
 		title Better Bluetooth
 	
-	body
+	body(onload="get_name()")
 		button(onclick="location.href = '/send'") Send
 		button(onclick="location.href = '/receive'" style='display:inline') Receive
 
+		p(id="error")
 
+
+	script.
+		function get_name(){
+			let error = ""
+
+			let name = prompt("Please enter your name: ")
+			if (name == "" || name == null){
+				error = "Can't select an empty user"
+			} else {
+				document.cookie = `name=${name}`
+			}
+
+			document.getElementById("error").innerHTML = error;
+		}
