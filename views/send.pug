@@ -1,5 +1,9 @@
 head
   script(src='static/peerjs.min.js')
-    script(src='static/send.js')
+  script(src='static/send.js')
 
 input(type='file')
+
+ul
+  each client in clients
+    li= client
