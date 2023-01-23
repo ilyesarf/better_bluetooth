@@ -1,20 +1,21 @@
-document.addEventListener('DOMContentLoaded', event => {
+send_file = function(){
+	
 	let name = document.cookie.split('name=')[1]
+	let recv_id = document.getElementById('recv_id').value
+	let file = document.getElementById('file_content').files[0]
 
 	const peer = new Peer(name, {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
 
-	const conn = peer.connect('receiver')
+	const conn = peer.connect(recv_id + '-recv')
 	
-	document.querySelector('input').onchange = function(event) {
-		
-		const file = event.target.files[0]
-		const blob = new Blob(event.target.files, {filetype: file.type})
-		
+	conn.on('open', () =>{
+		const blob = new Blob(document.getElementById('file_content').files, {filetype: file.type})
+	
 		conn.send({
 			content: blob,
 			filename: file.name,
 			filetype: file.type
 		})
-	}
-
-})
+	})	
+	
+}

@@ -20,10 +20,11 @@ server.on("connection", client => {
 	if (id.substr(id.length - 5) === '-recv'){
 		clients.push(id.replace('-recv', ''))
 	}
+
 });
 
 server.on("disconnect", client => {
-	clients = clients.filter(function(c) {return c !== client.getId()})
+	clients = clients.filter(function(c) {return c+'-recv' !== client.getId()})
 });
 
 // Web stuff
