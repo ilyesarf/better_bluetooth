@@ -2,10 +2,11 @@ head
   script(src='static/peerjs.min.js')
   script(src='static/send.js')
 
-input(type='text', id='recv_id')
-input(type='file', id="file_content")
-button(onclick='send_file()') Send
+body(onload='send_file()')
+  input(type='text', id='recv_id')
+  input(type='file', id="file_content")
+  //button(onclick='send_file()') Send
 
-ul
-  each client in clients
-    li= client
+  ul
+    each client in clients
+      li= client
