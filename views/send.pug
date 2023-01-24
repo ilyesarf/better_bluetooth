@@ -3,10 +3,11 @@ head
   script(src='static/send.js')
 
 body(onload='send_file()')
-  input(type='text', id='recv_id')
   input(type='file', id="file_content")
   //button(onclick='send_file()') Send
-
-  ul
-    each client in clients
-      li= client
+  br
+  br
+  each client in clients
+    input(type='checkbox', name='recv_id', value=client)
+    label #{client} 
+    br

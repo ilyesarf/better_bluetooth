@@ -6,21 +6,28 @@ send_file = function(){
 
 	document.getElementById('file_content').onchange = () => {
 		
-		let recv_id = document.getElementById('recv_id').value
+		let recv_ids = document.getElementsByName('recv_id')
 		let file = document.getElementById('file_content').files[0]
 		
-		const conn = peer.connect(recv_id + '-recv')
+		for (i = 0; i < recv_ids.length; i++){
+			if (recv_ids[i].checked == true){
+				let recv_id = recv_ids[i].value
+				const conn = peer.connect(recv_id + '-recv')
+				console.log(conn)
+				conn.on('open', () =>{
+					const blob = new Blob(document.getElementById('file_content').files, {filetype: file.type})
+				
+					conn.send({
+						content: blob,
+						filename: file.name,
+						filetype: file.type
+					})
+				})
+			} else{
+				continue
+			}
+		}
 		
-		conn.on('open', () =>{
-			const blob = new Blob(document.getElementById('file_content').files, {filetype: file.type})
-		
-			conn.send({
-				content: blob,
-				filename: file.name,
-				filetype: file.type
-			})
-		})
 	}
-
 
 }

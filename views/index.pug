@@ -14,13 +14,18 @@ html(lang="en")
 
 	script.
 		function get_name(){
+			let name = document.cookie.split('name=')[1] 
 			let error = ""
 
-			let name = prompt("Please enter your name: ")
-			if (name == "" || name == null){
-				error = "Can't select an empty user"
-			} else {
-				document.cookie = `name=${name}`
+			if (name === undefined){
+				name = prompt("Please enter your name: ")
+				
+				if (name == "" || name == null){
+					error = "Can't select an empty user"
+				} else {
+					document.cookie = `name=${name}`
+				}
+
 			}
 
 			document.getElementById("error").innerHTML = error;
