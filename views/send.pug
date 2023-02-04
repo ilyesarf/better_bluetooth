@@ -4,10 +4,10 @@ head
 
 body(onload='send_file()')
   input(type='file', id="file_content")
-  //button(onclick='send_file()') Send
+
   br
   br
-  each client in clients
-    input(type='checkbox', name='recv_id', value=client)
-    label #{client} 
+  each recvr in recvrs
+    input(type='checkbox', name='recv_id', value=recvr)
+    label #{recvr} 
     br

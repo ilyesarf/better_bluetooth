@@ -4,7 +4,7 @@ const express = require("express");
 const path = require("path");
 
 // PeerJS stuff
-clients = [];
+recvrs = [];
 
 const port = 3000;
 
@@ -15,16 +15,16 @@ const server = PeerServer({port: 9000, key: 'peerjs', path: '/peerjs'}, server =
 	  console.log("Started PeerServer on %s, port: %s", host, port);
 });
 
-server.on("connection", client => {
-	id = client.getId()
+server.on("connection", recvr => {
+	id = recvr.getId()
 	if (id.substr(id.length - 5) === '-recv'){
-		clients.push(id.replace('-recv', ''))
+		recvrs.push(id.replace('-recv', ''))
 	}
 
 });
 
-server.on("disconnect", client => {
-	clients = clients.filter(function(c) {return c+'-recv' !== client.getId()})
+server.on("disconnect", recvr => {
+	recvrs = recvrs.filter(function(c) {return c+'-recv' !== recvr.getId()})
 });
 
 // Web stuff
@@ -42,7 +42,7 @@ app.get("/receive", (req, res) => {
 });
 
 app.get("/send", (req, res) => {
-	res.render('send.pug', {clients: clients});
+	res.render('send.pug', {recvrs: recvrs});
 });
 
 
