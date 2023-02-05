@@ -1,5 +1,11 @@
 It's really complicated to share files from a device to another and bluetooth is bad. This is better bluetooh
 
+## How's this better than bluetooth?
+- Longer communication distances
+- Faster files transmission
+- More reliable
+- File sharing over multiple devices simultaneously
+
 ## Installation
 
 ```
