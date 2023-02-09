@@ -1,4 +1,4 @@
-send_file = function(){
+send_files = function(){
 	
 	let name = document.cookie.split('name=')[1]
 	const peer = new Peer(name, {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})

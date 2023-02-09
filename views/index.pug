@@ -1,19 +1,26 @@
 doctype html
 html(lang="en")
 	head
-		meta(charset='utf-8')
-		meta(name='viewport' content='width=device-width, initial-scale=1')
 		title Better Bluetooth
+		script(src='static/peerjs.min.js')
+		script(src='static/receive.js')
+		script(src='static/send.js')
 	
-	body(onload="get_name()")
-		button(onclick="location.href = '/send'") Send
-		button(onclick="location.href = '/receive'" style='display:inline') Receive
+	body
+		input(type='file', id="file_content")
+
+		br
+		br
+		
+		div(id='recvrs')
+		
+		br
+		br
 
 		p(id="error")
-
-
+		
 	script.
-		function get_name(){
+		function init(){
 			let name = document.cookie.split('name=')[1] 
 			let error = ""
 
@@ -27,6 +34,21 @@ html(lang="en")
 				}
 
 			}
+			
+			recvrs = '#{recvrs}';
+			
+			var div = document.getElementById('recvrs');
+			recvrs.split(',').forEach((recvr) => {
+				if (recvr !== name){
+					div.innerHTML += `<input type='checkbox', name='recv_id', value=${recvr}> <label>${recvr}</label> <br/>` 
+				}
+			});
 
 			document.getElementById("error").innerHTML = error;
+		}
+
+		document.body.onload = function(){
+			init();
+			receive_files();
+			send_files();
 		}

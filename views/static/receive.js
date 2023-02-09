@@ -7,10 +7,10 @@ function download(file){
     URL.revokeObjectURL(link.href);
 }
 
-document.addEventListener('DOMContentLoaded', event => {
+function receive_files(){
 	let name = document.cookie.split('name=')[1]
 
-	const peer = new Peer(name+'-recv', {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
+	const peer = new Peer(name, {host: location.hostname, port: 9000, key: 'peerjs', path: '/peerjs'})
 
 	peer.on('connection', conn => {
 		console.log(`${conn.peer} connected`)
@@ -20,4 +20,4 @@ document.addEventListener('DOMContentLoaded', event => {
 			}
 		})
 	})
-})
+}
