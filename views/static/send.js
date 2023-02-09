@@ -12,8 +12,9 @@ send_files = function(){
 		for (i = 0; i < recv_ids.length; i++){
 			if (recv_ids[i].checked == true){
 				let recv_id = recv_ids[i].value
-				const conn = peer.connect(recv_id + '-recv')
-				console.log(conn)
+
+				const conn = peer.connect(recv_id+'-recv')
+				
 				conn.on('open', () =>{
 					const blob = new Blob(document.getElementById('file_content').files, {filetype: file.type})
 				

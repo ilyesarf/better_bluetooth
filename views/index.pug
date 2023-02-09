@@ -35,15 +35,16 @@ html(lang="en")
 
 			}
 			
-			recvrs = '#{recvrs}';
-			
 			var div = document.getElementById('recvrs');
-			recvrs.split(',').forEach((recvr) => {
-				if (recvr !== name){
-					div.innerHTML += `<input type='checkbox', name='recv_id', value=${recvr}> <label>${recvr}</label> <br/>` 
-				}
-			});
 
+			recvrs = '#{recvrs}';
+			if (recvrs.length > 0){		
+				recvrs.split(',').forEach((recvr) => {
+					if (recvr !== name){
+						div.innerHTML += `<input type='checkbox', name='recv_id', value=${recvr}> <label>${recvr}</label> <br/>` 
+					}
+				});
+			}
 			document.getElementById("error").innerHTML = error;
 		}
 

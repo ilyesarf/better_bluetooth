@@ -17,13 +17,13 @@ const server = PeerServer({port: 9000, key: 'peerjs', path: '/peerjs'}, server =
 
 server.on("connection", recvr => {
 	id = recvr.getId()
-	if (recvrs.includes(id) === false){
-		recvrs.push(id)
+	if (recvrs.includes(id.replace('-recv', '')) === false && id.substr(id.length - 5) === '-recv'){
+		recvrs.push(id.replace('-recv', ''))
 	}
 });
 
 server.on("disconnect", recvr => {
-	recvrs = recvrs.filter(function(c) {return c !== recvr.getId()})
+	recvrs = recvrs.filter(function(c) {return c !== recvr.getId().replace('-recv', '')})
 });
 
 // Web stuff
