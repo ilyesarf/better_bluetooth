@@ -1,55 +1,77 @@
 doctype html
 html(lang="en")
-	head
-		title Better Bluetooth
-		script(src='static/peerjs.min.js')
-		script(src='static/receive.js')
-		script(src='static/send.js')
-	
-	body
-		input(type='file', id="file_content")
+    head
+        title Better Bluetooth
+        script(src='static/peerjs.min.js')
+        script(src='static/receive.js')
+        script(src='static/send.js')
+    
+    body
+        button(onclick='switch_mode()') Switch Mode 
+        
+        input(type='file', id="file_content")
 
-		br
-		br
-		
-		div(id='recvrs')
-		
-		br
-		br
+        br
+        br
+        
+        div(id='recvrs')
+        
+        br
+        br
 
-		p(id="error")
-		
-	script.
-		function init(){
-			let name = document.cookie.split('name=')[1] 
-			let error = ""
+        p(id="error")
 
-			if (name === undefined){
-				name = prompt("Please enter your name: ")
-				
-				if (name == "" || name == null){
-					error = "Can't select an empty user"
-				} else {
-					document.cookie = `name=${name}`
-				}
+    style.
+        body {
+            background-color: black;
+            color: white;
+        }
 
-			}
-			
-			var div = document.getElementById('recvrs');
+        .light-mode{
+            background-color: white;
+            color: black;
+        }
+        button {
+            position: absolute;
+            left: 90%;
+        }
+        
+    script.
+        function init(){
+            let name = document.cookie.split('name=')[1] 
+            let error = ""
 
-			recvrs = '#{recvrs}';
-			if (recvrs.length > 0){		
-				recvrs.split(',').forEach((recvr) => {
-					if (recvr !== name){
-						div.innerHTML += `<input type='checkbox', name='recv_id', value=${recvr}> <label>${recvr}</label> <br/>` 
-					}
-				});
-			}
-			document.getElementById("error").innerHTML = error;
-		}
+            if (name === undefined){
+                name = prompt("Please enter your name: ")
+                
+                if (name == "" || name == null){
+                    error = "Can't select an empty user"
+                } else {
+                    document.cookie = `name=${name}`
+                }
 
-		document.body.onload = function(){
-			init();
-			receive_files();
-			send_files();
-		}
+            }
+            
+            var div = document.getElementById('recvrs');
+
+            recvrs = '#{recvrs}';
+            if (recvrs.length > 0){     
+                recvrs.split(',').forEach((recvr) => {
+                    if (recvr !== name){
+                        div.innerHTML += `<input type='checkbox', name='recv_id', value=${recvr}> <label>${recvr}</label> <br/>` 
+                    }
+                });
+            }
+            document.getElementById("error").innerHTML = error;
+        }
+
+        function switch_mode(){
+            var element = document.body;
+            element.classList.toggle("light-mode");
+        }
+        
+        document.body.onload = function(){
+            init();
+            receive_files();
+            send_files();
+        }
